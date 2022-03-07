@@ -59,7 +59,7 @@ class _TasksScreenState extends State<TasksScreen> {
             ),
           );
         } else {
-          return Text("Something went wrong");
+          return const Text("Something went wrong");
         }
       }),
     );

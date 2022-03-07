@@ -20,9 +20,8 @@ class TaskBloc extends Bloc<TaskBlocEvent, TaskBlocState> {
   void _onAddTask(AddTask event, Emitter<TaskBlocState> emit) {
     final state = this.state;
     if (state is Taskloaded) {
-      emit(Taskloaded(
-        todos: List.from(state.todos)..add(event.todos),
-      ));
+      state.todos.add(event.todos);
+      emit(Taskloaded(todos: state.todos));
     }
   }
 

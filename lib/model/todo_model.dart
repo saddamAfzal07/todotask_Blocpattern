@@ -4,6 +4,8 @@ class Todo {
   final double id;
   final String task;
   final String description;
+  bool? isCompleted;
+  bool? isCancelled;
 
   Todo({
     required this.id,
