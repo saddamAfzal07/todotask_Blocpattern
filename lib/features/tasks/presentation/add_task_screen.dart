@@ -69,7 +69,7 @@ class _AddNewTaaskState extends State<AddNewTaask> {
                             task: taskcontroller.value.text,
                             description: descontroller.value.text);
                         context.read<TaskBloc>().add(
-                              AddTask(todos: todo),
+                              AddTask(todo: todo),
                             );
                         Navigator.of(context).pop();
                       },

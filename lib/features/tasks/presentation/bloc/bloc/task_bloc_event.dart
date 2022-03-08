@@ -13,11 +13,14 @@ class LoadTask extends TaskBlocEvent {
 }
 
 class AddTask extends TaskBlocEvent {
-  final todos;
-  AddTask({required this.todos});
+
+  ///This is the todo to add in to the todo list.
+  final Todo todo;
+
+  AddTask({required this.todo});
 }
 
 class DeleteTask extends TaskBlocEvent {
-  final todos;
-  DeleteTask({required this.todos});
+  final double todoId;
+  DeleteTask({required this.todoId});
 }

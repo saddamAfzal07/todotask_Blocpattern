@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todotask_app/features/tasks/presentation/bloc/bloc/task_bloc.dart';
+import 'package:todotask_app/model/todo_model.dart';
 
 class ShowTasks extends StatefulWidget {
-  final List taskstate;
+  final List<Todo> taskstate;
   const ShowTasks({Key? key, required this.taskstate}) : super(key: key);
 
   @override
@@ -16,7 +17,10 @@ class _ShowTasksState extends State<ShowTasks> {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: widget.taskstate.length,
-      itemBuilder: (BuildContext, index) {
+      itemBuilder: (BuildContext context, int index) {
+
+        final currentTodo = widget.taskstate[index];
+
         return Card(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -24,20 +28,20 @@ class _ShowTasksState extends State<ShowTasks> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${widget.taskstate[index].task}",
+                  currentTodo.task,
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: [
-                    IconButton(onPressed: () {}, icon: Icon(Icons.add_task)),
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.add_task)),
                     IconButton(
                         onPressed: () {
                           context
                               .read<TaskBloc>()
-                              .add(DeleteTask(todos: widget.taskstate[index]));
+                              .add(DeleteTask(todoId: currentTodo.id));
                         },
-                        icon: Icon(Icons.cancel)),
+                        icon: const Icon(Icons.cancel)),
                   ],
                 )
               ],

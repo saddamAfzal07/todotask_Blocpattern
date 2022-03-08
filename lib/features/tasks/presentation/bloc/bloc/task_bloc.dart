@@ -5,6 +5,9 @@ import 'package:todotask_app/model/todo_model.dart';
 part 'task_bloc_event.dart';
 part 'task_bloc_state.dart';
 
+
+
+
 class TaskBloc extends Bloc<TaskBlocEvent, TaskBlocState> {
   TaskBloc() : super(Taskloading()) {
     on<LoadTask>(_onLoadTask);
@@ -20,7 +23,10 @@ class TaskBloc extends Bloc<TaskBlocEvent, TaskBlocState> {
   void _onAddTask(AddTask event, Emitter<TaskBlocState> emit) {
     final state = this.state;
     if (state is Taskloaded) {
-      state.todos.add(event.todos);
+
+      final todoToAdd = event.todo;
+
+      state.todos.add(todoToAdd);
       emit(Taskloaded(todos: state.todos));
     }
   }
@@ -28,11 +34,12 @@ class TaskBloc extends Bloc<TaskBlocEvent, TaskBlocState> {
   void _onDeleteTask(DeleteTask event, Emitter<TaskBlocState> emit) {
     final state = this.state;
     if (state is Taskloaded) {
-      List<Todo> todos = state.todos.where((todo) {
-        return todo.id != event.todos.id;
-      }).toList();
+      state.todos.removeWhere((element) => element.id == event.todoId);
 
-      emit(Taskloaded(todos: todos));
+      emit(Taskloaded(todos: state.todos));
     }
   }
 }
+
+
+
