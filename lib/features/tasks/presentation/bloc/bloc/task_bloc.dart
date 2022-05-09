@@ -20,6 +20,7 @@ class TaskBloc extends Bloc<TaskBlocEvent, TaskBlocState> {
     );
   }
 
+  ///This is the logic to add the task in to the list
   void _onAddTask(AddTask event, Emitter<TaskBlocState> emit) {
     final state = this.state;
     if (state is Taskloaded) {
@@ -27,6 +28,7 @@ class TaskBloc extends Bloc<TaskBlocEvent, TaskBlocState> {
       final todoToAdd = event.todo;
 
       state.todos.add(todoToAdd);
+
       emit(Taskloaded(todos: state.todos));
     }
   }

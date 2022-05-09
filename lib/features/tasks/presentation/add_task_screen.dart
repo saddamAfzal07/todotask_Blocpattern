@@ -15,6 +15,7 @@ class _AddNewTaaskState extends State<AddNewTaask> {
   TextEditingController taskcontroller = TextEditingController();
 
   TextEditingController descontroller = TextEditingController();
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -64,13 +65,15 @@ class _AddNewTaaskState extends State<AddNewTaask> {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        var todo = Todo(
-                            id: DateTime.now().millisecond / 100,
-                            task: taskcontroller.value.text,
-                            description: descontroller.value.text);
-                        context.read<TaskBloc>().add(
-                              AddTask(todo: todo),
-                            );
+
+                        Todo todoToAdd = Todo(
+                          id: DateTime.now().millisecond / 100,
+                          task: taskcontroller.value.text,
+                          description: descontroller.value.text,
+                        );
+
+                        context.read<TaskBloc>().add(AddTask(todo: todoToAdd));
+
                         Navigator.of(context).pop();
                       },
                       child: const Text(
